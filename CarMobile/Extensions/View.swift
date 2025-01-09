@@ -8,12 +8,13 @@
 import Foundation
 import SwiftUI
 
-extension View {
-    func applyHomeCardStyle() -> some View {
-        self.modifier(HomeCardModifier())
-    }
+enum ModifierType {
+    case homeCard
+    case tabBar
+}
 
-    func applyTabBardStyle() -> some View {
-        self.modifier(TabBarModifier())
+extension View {
+    func applyModifier(type: ModifierType) -> some View {
+        self.modifier(Modifier(type: type))
     }
 }

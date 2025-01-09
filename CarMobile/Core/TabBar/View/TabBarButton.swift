@@ -17,16 +17,18 @@ struct TabBarButton: View {
     var body: some View {
         ZStack {
                 Image(systemName: imageName)
-                    .font(.system(size: 25))
+                    .font(.system(size: 22))
                     .foregroundStyle(isActive ? .white : .gray)
             if isActive {
+                //border
                 Circle()
                     .stroke(lineWidth: 2)
-                    .frame(width: 50, height: 45)
+                    .frame(height: 40)
                     .foregroundStyle(LinearGradient(colors: [.progressStart, .progressEnd], startPoint: .topTrailing, endPoint: .bottomLeading))
+                //shadow
                 Circle()
                     .stroke(lineWidth: 4)
-                    .frame(width: 50, height: 50)
+                    .frame(height: 50)
                     .blur(radius: 5)
                     .foregroundStyle(.white.opacity(0.3))
             }

@@ -18,4 +18,5 @@ struct CustomColor {
     let progressTheme = Color("ProgressTheme")
     let progressStart = Color("ProgressStart")
     let progressEnd = Color("ProgressEnd")
+    let lightGray = Color("LightGray")
 }
