@@ -8,8 +8,13 @@
 import Foundation
 import SwiftUI
 
-extension HomeView {
-    var Car: some View {
+struct CarView: View {
+
+    //MARK: - Properties
+    @State var lightPercentage: Double = 0.0
+    @State var light: CGFloat = 0.0
+
+    var body: some View {
         ZStack {
             Capsule()
                 .fill(Color.white)
@@ -24,18 +29,27 @@ extension HomeView {
                 .offset(y: 30)
         }
         .onAppear {
-            withAnimation(.easeInOut(duration: 2)) {
-                light = 50
-            }
-            Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { timer in
-                if light <  100 {
-                    lightPercentage += 1
-                } else {
-                    timer.invalidate()
+            Task {
+                withAnimation(.easeInOut(duration: 2)) {
+                    light = 50
                 }
+                await updateLightPercentage()
             }
         }
         .padding(.horizontal)
         .padding(.top)
     }
+
+    private func updateLightPercentage() async {
+        while light < 100 {
+            if lightPercentage < 100 {
+                lightPercentage += 1
+            }
+            try? await Task.sleep(nanoseconds: 30_000_000)
+        }
+    }
+}
+
+#Preview {
+    CarView()
 }

@@ -8,9 +8,10 @@
 import Foundation
 import SwiftUI
 
-extension HomeView {
-    //QuickAccessPanel
-    var QuickAccessCard: some View {
+struct QuickAccessCardView: View {
+
+    //MARK: - View
+    var body: some View {
         VStack(spacing: 20) {
             SoftwareUpdateButton
             Divider().background(LinearGradient(colors: [.clear, .white, .clear], startPoint: .leading, endPoint: .trailing))
@@ -20,7 +21,9 @@ extension HomeView {
         }
         .applyModifier(type: .homeCard)
     }
+}
 
+extension QuickAccessCardView {
     //SoftwareUpdateButton
     private var SoftwareUpdateButton: some View {
         Button {
@@ -74,4 +77,8 @@ extension HomeView {
             .padding(.bottom)
         }
     }
+}
+
+#Preview {
+    QuickAccessCardView()
 }

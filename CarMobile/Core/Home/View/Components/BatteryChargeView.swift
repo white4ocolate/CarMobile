@@ -8,9 +8,15 @@
 import Foundation
 import SwiftUI
 
-extension HomeView {
-    //BatteryCharge
-    var BatteryCharge: some View {
+struct BatteryChargeCardView: View {
+
+    //MARK: - Properties
+    @State var batteryCharge: Double = 0.73
+    @State var chargePercentage: Double = 0.0
+    @State var fillCharge: CGFloat = 0.0
+
+    //MARK: - View
+    var body: some View {
         ZStack {
             Circle()
                 .stroke(lineWidth: 1)
@@ -41,24 +47,25 @@ extension HomeView {
         }
         .offset(x: 100, y: -77)
         .onAppear {
-            withAnimation(.easeInOut(duration: batteryCharge * 3 )) {
-                fillCharge = batteryCharge
-            }
-            Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { timer in
-                var stopTimer = true
-
-                if chargePercentage < batteryCharge * 100 {
-                    chargePercentage += 1
-                    stopTimer = false
+            Task {
+                withAnimation(.easeInOut(duration: batteryCharge * 3 )) {
+                    fillCharge = batteryCharge
                 }
-                if healthPercentage < batteryHealth * 100 {
-                    healthPercentage += 1
-                    stopTimer = false
-                }
-                if stopTimer {
-                    timer.invalidate()
-                }
+                await updateChargePercentages()
             }
         }
     }
+
+    private func updateChargePercentages() async {
+        while chargePercentage < batteryCharge * 100{
+            if chargePercentage < batteryCharge * 100 {
+                chargePercentage += 1
+            }
+            try? await Task.sleep(nanoseconds: 30_000_000)
+        }
+    }
+}
+
+#Preview {
+    BatteryChargeCardView(batteryCharge: 0.42, chargePercentage: 0.0, fillCharge: 0.0)
 }

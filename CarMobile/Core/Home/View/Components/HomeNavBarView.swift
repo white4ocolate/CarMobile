@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-extension HomeView {
-    //NavBar
-    var NavBar: some View {
+struct NavBarView: View {
+    //MARK: - View
+    var body: some View {
         ZStack {
             TitleAndNotifications
                 .padding(.horizontal)
@@ -25,7 +25,9 @@ extension HomeView {
         .frame(maxHeight: .infinity, alignment: .top)
     }
 
-    //TitleAndNotifications
+}
+
+extension NavBarView {
     private var TitleAndNotifications: some View {
         HStack {
             CircleProfileImageView()
@@ -35,15 +37,19 @@ extension HomeView {
                     .foregroundStyle(.white)
                     .fontWeight(.semibold)
                 Text("Audi e-tron 2024")
-                    .foregroundStyle(.lightGray)
+                    .foregroundStyle(.secondaryText)
                     .fontWeight(.regular)
             }
             .font(.system(size: 16))
             Spacer()
             Image(systemName: "bell.badge.fill")
-                .foregroundStyle(.lightGray)
+                .foregroundStyle(.secondaryText)
                 .font(.system(size: 25))
         }
         .padding(.horizontal)
     }
+}
+
+#Preview {
+    NavBarView()
 }

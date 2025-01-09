@@ -8,21 +8,41 @@
 import Foundation
 import SwiftUI
 
-extension HomeView {
-    //BatteryInfo
-    var BatteryInfoCard: some View {
+struct BatteryInfoCardView: View {
+
+    //MARK: - Properties
+    @State var batteryHealth: Double = 0.88
+    @State var fillHealth: CGFloat = 0.0
+    @State var healthPercentage: Double = 0.0
+
+    //MARK: - View
+    var body: some View {
         VStack {
             BatteryHealth
             BatteryLevel
         }
         .applyModifier(type: .homeCard)
         .onAppear {
-            withAnimation(.easeInOut(duration: batteryHealth * 3)) {
-                fillHealth = batteryHealth
+            Task {
+                withAnimation(.easeInOut(duration: batteryHealth * 3)) {
+                    fillHealth = batteryHealth
+                }
+                await updateHealthPercentages()
             }
         }
     }
 
+    private func updateHealthPercentages() async {
+        while healthPercentage < batteryHealth * 100 {
+            if healthPercentage < batteryHealth * 100 {
+                healthPercentage += 1
+            }
+            try? await Task.sleep(nanoseconds: 30_000_000)
+        }
+    }
+}
+
+extension BatteryInfoCardView {
     //BatteryHealth
     private var BatteryHealth: some View {
         Button {
@@ -78,4 +98,8 @@ extension HomeView {
             .offset(y: -16)
         }
     }
+}
+
+#Preview {
+    BatteryInfoCardView()
 }
