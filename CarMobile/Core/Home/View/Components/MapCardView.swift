@@ -12,11 +12,12 @@ struct MapCardView: View {
 
     //MARK: - View
     var body: some View {
-        VStack(spacing: 0) {
-            HStack {
+        VStack {
+            HStack(alignment: .bottom) {
                 Text("Nearest Station")
                     .fontWeight(.semibold)
                     .font(.system(size: 17))
+                    .frame(height: 30)
                 Spacer()
                 Button {
                     print("Show all places")
@@ -24,10 +25,11 @@ struct MapCardView: View {
                     Text("View all")
                         .foregroundStyle(.secondaryText)
                         .fontWeight(.regular)
+                        .frame(width: 100, height: 30, alignment: .trailing)
+                        .contentShape(Rectangle())
                 }
-                .frame(width: 80, height: 30, alignment: .trailing)
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 20)
             Image("map")
                 .resizable()
                 .scaledToFill()

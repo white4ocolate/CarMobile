@@ -15,6 +15,7 @@ struct HomeView: View {
     //MARK: - View
     var body: some View {
         ZStack {
+            Color.black.ignoresSafeArea()
             ScrollView {
                 VStack(spacing: 10) {
                     ZStack {
