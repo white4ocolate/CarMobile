@@ -10,7 +10,8 @@ import SwiftUI
 struct HomeView: View {
 
     //MARK: - Properties
-    @State var selectedTab: Tabs = .home
+//    @State var selectedTab: Tabs = .home
+    @StateObject private var coordinator = Coordinator()
 
     //MARK: - View
     var body: some View {
@@ -19,8 +20,8 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 10) {
                     ZStack {
-                        CarView()
-                        BatteryChargeCardView()
+                        CarInfoView()
+                        BatteryChargeView()
                     }
                     QuickAccessCardView()
                     BatteryInfoCardView()
@@ -31,10 +32,6 @@ struct HomeView: View {
             }
             .overlay {
                 NavBarView()
-            }
-            VStack {
-                Spacer()
-                TabBarView(selectedTab: $selectedTab)
             }
         }
     }

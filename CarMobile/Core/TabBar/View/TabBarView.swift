@@ -29,15 +29,15 @@ struct TabBarView: View {
     var body: some View {
         ZStack {
             HStack {
-                ForEach(tabItems, id: \.tab) { item in
+                ForEach(tabItems, id: \.tab) { items in
                     Button {
                         let generator = UIImpactFeedbackGenerator(style: .soft)
                         generator.impactOccurred()
-                        selectedTab = item.tab
-                        print("pressed \(item.tab)")
+                        selectedTab = items.tab
+                        print("pressed \(items.tab)")
                     } label: {
-                        TabBarButton(imageName: item.icon,
-                                     isActive: selectedTab == item.tab)
+                        TabBarButton(imageName: items.icon,
+                                     isActive: selectedTab == items.tab)
                         .frame(width: 80, height: 80)
                     }
                     .contentShape(Rectangle())

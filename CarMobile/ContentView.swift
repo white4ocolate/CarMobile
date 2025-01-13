@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var coordinator = Coordinator()
+
     var body: some View {
-        HomeView()
+        ZStack {
+            coordinator.view(for: coordinator.currentTab)
+            VStack {
+                Spacer()
+                TabBarView(selectedTab: $coordinator.currentTab)
+            }
+        }
     }
 }
 

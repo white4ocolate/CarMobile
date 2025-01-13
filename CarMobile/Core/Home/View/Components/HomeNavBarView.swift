@@ -24,7 +24,6 @@ struct NavBarView: View {
         }
         .frame(maxHeight: .infinity, alignment: .top)
     }
-
 }
 
 extension NavBarView {

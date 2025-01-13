@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct BatteryChargeCardView: View {
+struct BatteryChargeView: View {
 
     //MARK: - Properties
     @State var batteryCharge: Double = 0.73
@@ -67,5 +67,5 @@ struct BatteryChargeCardView: View {
 }
 
 #Preview {
-    BatteryChargeCardView(batteryCharge: 0.42, chargePercentage: 0.0, fillCharge: 0.0)
+    BatteryChargeView(batteryCharge: 0.42, chargePercentage: 0.0, fillCharge: 0.0)
 }

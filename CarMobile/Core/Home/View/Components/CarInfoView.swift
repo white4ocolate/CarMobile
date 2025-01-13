@@ -1,5 +1,5 @@
 //
-//  CarView.swift
+//  CarInfoView.swift
 //  CarMobile
 //
 //  Created by white4ocolate on 09.01.2025.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct CarView: View {
+struct CarInfoView: View {
 
     //MARK: - Properties
     @State var lightPercentage: Double = 0.0
@@ -51,5 +51,5 @@ struct CarView: View {
 }
 
 #Preview {
-    CarView()
+    CarInfoView()
 }
