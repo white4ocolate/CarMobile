@@ -24,12 +24,24 @@ struct CarControlView: View {
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            VStack {
-                Speedometer
-                Spacer()
-                StartButton
+            ZStack {
+                VStack {
+                    Speedometer
+                    Spacer()
+                    StartButton
+                }
+                .padding(.bottom, 80)
+                HStack {
+                    LeftControlBar()
+                        .offset(x: isVisible ? 0 : -200)
+                        .animation(.easeOut(duration: 1.5), value: isVisible)
+                    RightControlBar()
+                        .offset(x: isVisible ? 0 : +200)
+                        .animation(.easeOut(duration: 1.5), value: isVisible)
+                }
+
+                .padding(.top, 150)
             }
-            .padding(.bottom, 80)
         }
     }
 }
@@ -56,7 +68,7 @@ extension CarControlView {
 
             //speedline
             Circle()
-                .trim(from: 0, to: 0.4)
+                .trim(from: 0, to: 0.75)
                 .rotation(Angle(degrees: 135))
                 .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .round, lineJoin: .round))
                 .foregroundStyle(LinearGradient(colors: [.progressStart, .progressEnd], startPoint: .leading, endPoint: .trailing))
@@ -65,13 +77,38 @@ extension CarControlView {
 
             //background speedline
             Circle()
-                .trim(from: 0, to: 0.4)
+                .trim(from: 0, to: 0.75)
                 .rotation(Angle(degrees: 135))
-                .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .round, lineJoin: .round))
+                .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
                 .foregroundStyle(LinearGradient(colors: [.progressStart, .progressEnd], startPoint: .leading, endPoint: .trailing))
                 .frame(width: 250, height: 250)
-                .blur(radius: 20)
+                .blur(radius: 30)
                 .opacity(0)
+
+            VStack(spacing: 30) {
+                VStack {
+                    Text("0")
+                        .font(.system(size: 55))
+                        .fontWeight(.heavy)
+                    Text("mph")
+                }
+                HStack {
+                    Image(systemName: "ev.charger.fill")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                    Text("200 mi")
+                }
+            }
+            .frame(width:150, height: 210, alignment: .bottom)
+            .opacity(backLight)
+
+            Circle()
+                .trim(from: 0, to: 0.2)
+                .rotation(Angle(degrees: 54))
+                .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                .foregroundStyle(LinearGradient(colors: [.progressStart, .progressEnd], startPoint: .leading, endPoint: .trailing))
+                .frame(width: 250, height: 250)
+                .opacity(backLight)
 
             //backlight on numbers
             Circle()
@@ -86,7 +123,6 @@ extension CarControlView {
             ZStack {
                 ForEach(0..<8) { index in
                     if index != 7 {
-
                         //white dots
                         Circle()
                             .fill(Color.white)
@@ -128,19 +164,14 @@ extension CarControlView {
                 .trim(from: 0, to: circumferenceLength)
                 .rotation(Angle(degrees: 135))
                 .stroke(style: StrokeStyle(lineWidth: 1, lineCap: .round, lineJoin: .round))
-                .foregroundStyle(.darkBlue)
+                .foregroundStyle(.progressEnd)
                 .frame(width: 120, height: 120)
                 .opacity(backLight)
 
-            //speed
-            Text("0")
-                .font(.system(size: 60))
-                .fontWeight(.heavy)
-                .opacity(backLight)
         }
-        .offset(y: isVisible ? 0 : UIScreen.main.bounds.height/10)
+        .offset(y: isVisible ? 0 : +200)
         .opacity(isVisible ? 1 : 0)
-        .animation(.easeOut(duration: 0.5), value: isVisible)
+        .animation(.easeOut(duration: 1), value: isVisible)
         .onAppear {
             withAnimation {
                 isVisible = true
@@ -206,8 +237,6 @@ extension CarControlView {
             }
         }
     }
-
-    
 }
 
 #Preview {
