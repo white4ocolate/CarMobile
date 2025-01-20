@@ -22,25 +22,27 @@ struct CarControlView: View {
     let hiddenIndices = 55...72
 
     var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
+        NavigationStack {
             ZStack {
-                VStack {
-                    Speedometer
-                    Spacer()
-                    StartButton
-                }
-                .padding(.bottom, 80)
-                HStack {
-                    LeftControlBar()
-                        .offset(x: isVisible ? 0 : -200)
-                        .animation(.easeOut(duration: 1.5), value: isVisible)
-                    RightControlBar()
-                        .offset(x: isVisible ? 0 : +200)
-                        .animation(.easeOut(duration: 1.5), value: isVisible)
-                }
+                Color.black.ignoresSafeArea()
+                ZStack {
+                    VStack {
+                        Speedometer
+                        Spacer()
+                        StartButton
+                    }
+                    .padding(.bottom, 80)
+                    HStack {
 
-                .padding(.top, 150)
+                        LeftControlBar()
+                            .offset(x: isVisible ? 0 : -200)
+                            .animation(.easeOut(duration: 1.5), value: isVisible)
+                        RightControlBar()
+                            .offset(x: isVisible ? 0 : +200)
+                            .animation(.easeOut(duration: 1.5), value: isVisible)
+                    }
+                    .padding(.top, 150)
+                }
             }
         }
     }

@@ -23,7 +23,7 @@ struct MapCardView: View {
                     print("Show all places")
                 } label: {
                     Text("View all")
-                        .foregroundStyle(.secondaryText)
+                        .foregroundStyle(.gray)
                         .fontWeight(.regular)
                         .frame(width: 100, height: 30, alignment: .trailing)
                         .contentShape(Rectangle())

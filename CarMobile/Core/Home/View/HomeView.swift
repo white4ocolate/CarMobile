@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
 
     //MARK: - Properties
-//    @State var selectedTab: Tabs = .home
+    @State var selectedTab: Tabs = .home
     @StateObject private var coordinator = Coordinator()
 
     //MARK: - View
@@ -28,11 +28,25 @@ struct HomeView: View {
                     MapCardView()
                     Spacer()
                 }
-                .padding(.vertical, 80)
             }
-            .overlay {
-                NavBarView()
+            .scrollIndicators(.hidden)
+            .safeAreaInset(edge: .top) {
+                EmptyView()
+                    .frame(height: 80)
             }
+            .safeAreaInset(edge: .bottom) {
+                EmptyView()
+                    .frame(height: 50)
+            }
+
+            VStack {
+                Spacer()
+                TabBarView(selectedTab: $selectedTab)
+            }
+        }
+        .overlay {
+            NavBarView()
+
         }
     }
 }

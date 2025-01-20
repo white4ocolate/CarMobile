@@ -45,7 +45,7 @@ struct RightTrapezium: Shape {
         path.addQuadCurve(to: CGPoint(x: rect.maxX - 50, y: rect.maxY - 60), control: CGPoint(x: rect.maxX - 50, y: rect.maxY - 50))
         path.addLine(to: CGPoint(x: rect.maxX - 50, y: rect.minY + 60))
         path.addQuadCurve(to: CGPoint(x: rect.maxX - 40, y: rect.minY + 40), control: CGPoint(x: rect.maxX - 50, y: rect.minY + 50))
-        path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+        path.closeSubpath()
 
         return path
     }

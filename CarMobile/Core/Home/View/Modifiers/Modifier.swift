@@ -18,7 +18,7 @@ struct Modifier: ViewModifier {
         case .homeCard:
             return 20
         case .tabBar:
-            return 100
+            return 22
         }
     }
 
@@ -41,4 +41,8 @@ struct Modifier: ViewModifier {
             .padding(.horizontal)
             .padding(.bottom, 5)
     }
+}
+
+#Preview {
+    TabBarView(selectedTab: .constant(.home))
 }

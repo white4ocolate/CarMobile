@@ -11,18 +11,13 @@ import SwiftUI
 struct NavBarView: View {
     //MARK: - View
     var body: some View {
-        ZStack {
             TitleAndNotifications
-                .padding(.horizontal)
-                .frame(height: 90, alignment: .bottom)
-
-                .background(
-                    TransparentBlurView(removeAllFilters: true)
-                        .blur(radius: 20, opaque: true)
-                )
-                .ignoresSafeArea()
-        }
-        .frame(maxHeight: .infinity, alignment: .top)
+            .frame(height: 55, alignment: .top)
+            .padding(.horizontal)
+            .padding(.top, 49)
+            .backgroundBlur(radius: 20, opaque: true)
+            .frame(maxHeight: .infinity, alignment: .top)
+            .ignoresSafeArea()
     }
 }
 
@@ -36,15 +31,17 @@ extension NavBarView {
                     .foregroundStyle(.white)
                     .fontWeight(.semibold)
                 Text("Audi e-tron 2024")
-                    .foregroundStyle(.secondaryText)
+                    .foregroundStyle(.secondary)
                     .fontWeight(.regular)
             }
             .font(.system(size: 16))
+
             Spacer()
             Image(systemName: "bell.badge.fill")
-                .foregroundStyle(.secondaryText)
+                .foregroundStyle(.secondary)
                 .font(.system(size: 25))
         }
+        .padding(.vertical, 7)
         .padding(.horizontal)
     }
 }

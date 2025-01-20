@@ -11,13 +11,15 @@ struct ContentView: View {
     @StateObject private var coordinator = Coordinator()
 
     var body: some View {
-        ZStack {
-            coordinator.view(for: coordinator.currentTab)
-            VStack {
-                Spacer()
-                TabBarView(selectedTab: $coordinator.currentTab)
-            }
-        }
+//        ZStack {
+//            coordinator.view(for: coordinator.currentTab)
+//            VStack {
+//                Spacer()
+//                TabBarView(selectedTab: $coordinator.currentTab)
+//            }
+//        }
+
+        HomeView()
     }
 }
 

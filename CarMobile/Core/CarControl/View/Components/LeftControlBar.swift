@@ -23,8 +23,12 @@ struct LeftControlBar : View {
             VStack(spacing: 60) {
                 Image(systemName: "car.fill")
                     .font(.system(size: 25))
-                Image(systemName: "fan.fill")
-                    .font(.system(size: 25))
+                NavigationLink {
+                    AirControlView()
+                } label: {
+                    Image(systemName: "fan.fill")
+                        .font(.system(size: 25))
+                }
                 Image(systemName: "parkingsign")
                     .font(.system(size: 25))
                 Image(systemName: "steeringwheel")
@@ -33,6 +37,7 @@ struct LeftControlBar : View {
             .foregroundStyle(.gray)
             .padding(8)
         }
+
     }
 }
 
@@ -46,7 +51,7 @@ struct LeftTrapezium: Shape {
         path.addQuadCurve(to: CGPoint(x: rect.minX + 50, y: rect.maxY - 60), control: CGPoint(x: rect.minX + 50, y: rect.maxY - 50))
         path.addLine(to: CGPoint(x: rect.minX + 50, y: rect.minY + 60))
         path.addQuadCurve(to: CGPoint(x: rect.minX + 40, y: rect.minY + 40), control: CGPoint(x: rect.minX + 50, y: rect.minY + 50))
-        path.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
+        path.closeSubpath()
 
         return path
     }
