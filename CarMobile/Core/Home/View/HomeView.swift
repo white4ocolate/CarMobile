@@ -9,43 +9,39 @@ import SwiftUI
 
 struct HomeView: View {
 
-    //MARK: - Properties
-    @State var selectedTab: Tabs = .home
-    @StateObject private var coordinator = Coordinator()
-
     //MARK: - View
     var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
-            ScrollView {
-                VStack(spacing: 10) {
-                    ZStack {
-                        CarInfoView()
-                        BatteryChargeView()
+        NavigationStack {
+            ZStack {
+                Color.black.ignoresSafeArea()
+                ScrollView {
+                    VStack(spacing: 10) {
+                        ZStack {
+                            CarInfoView()
+                            BatteryChargeView()
+                        }
+                        QuickAccessCardView()
+                        BatteryInfoCardView()
+                        MapCardView()
+                        Spacer()
                     }
-                    QuickAccessCardView()
-                    BatteryInfoCardView()
-                    MapCardView()
-                    Spacer()
+                }
+                .scrollIndicators(.hidden)
+                .safeAreaInset(edge: .top) {
+                    EmptyView()
+                        .frame(height: 80)
+                }
+                .safeAreaInset(edge: .bottom) {
+                    EmptyView()
+                        .frame(height: 50)
                 }
             }
-            .scrollIndicators(.hidden)
-            .safeAreaInset(edge: .top) {
-                EmptyView()
-                    .frame(height: 80)
+            .overlay {
+                NavBarView()
             }
-            .safeAreaInset(edge: .bottom) {
-                EmptyView()
-                    .frame(height: 50)
+            .overlay {
+                TabBarView()
             }
-
-            VStack {
-                Spacer()
-                TabBarView(selectedTab: $selectedTab)
-            }
-        }
-        .overlay {
-            NavBarView()
 
         }
     }

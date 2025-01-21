@@ -7,56 +7,55 @@
 
 import SwiftUI
 
-enum Tabs: Int {
-    case home
-    case car
-    case lock
-    case bolt
-}
-
 struct TabBarView: View {
-
-    //MARK: - Properties
-    @Binding var selectedTab: Tabs
-    let tabItems: [(icon: String, tab: Tabs)] = [
-           ("house.fill", .home),
-           ("car.fill", .car),
-           ("lock.fill", .lock),
-           ("bolt.fill", .bolt)
-       ]
 
     //MARK: - View
     var body: some View {
-        ZStack {
-            HStack {
-                ForEach(tabItems, id: \.tab) { items in
-                    Button {
-                        let generator = UIImpactFeedbackGenerator(style: .soft)
-                        generator.impactOccurred()
-                        selectedTab = items.tab
-                        print("pressed \(items.tab)")
-                    } label: {
-                        TabBarButton(imageName: items.icon,
-                                     isActive: selectedTab == items.tab)
-                        .frame(width: 80, height: 80)
-                    }
-                    .contentShape(Rectangle())
-                }
+        HStack(spacing: 40) {
+            NavigationLink {
+                CarControlView()
+            } label: {
+                Image(systemName: "car.fill")
+                    .foregroundStyle(.white)
+                    .frame(width: 50, height: 50)
             }
-            .frame(width: 350, height: 30)
-            .padding()
-            .background(
-                TransparentBlurView(removeAllFilters: true)
-                    .blur(radius: 10, opaque: true)
-                    .clipShape(
-                        RoundedRectangle(cornerRadius: 100)
-                    )
-            )
-            .applyModifier(type: .tabBar)
+            .padding(.horizontal, 30)
+
+            NavigationLink {
+                CarControlView()
+            } label: {
+                Image(systemName: "lock.fill")
+                    .foregroundStyle(.white)
+                    .frame(width: 50, height: 50)
+            }
+            .padding(.horizontal, 30)
+
+            NavigationLink {
+                CarControlView()
+            } label: {
+                Image(systemName: "bolt.fill")
+                    .foregroundStyle(.white)
+                    .frame(width: 50, height: 50)
+            }
+            .padding(.horizontal, 30)
+
         }
+
+        .font(.title)
+        .frame(height: 55)
+        .padding(EdgeInsets(top: 0, leading: 32, bottom: 24, trailing: 32 ))
+        .backgroundBlur(radius: 20, opaque: true)
+        .background(
+            Rectangle()
+                .stroke(.gray.opacity(0.25))
+        )
+        .frame(maxHeight: .infinity, alignment: .bottom)
+        .ignoresSafeArea()
+
     }
 }
 
 #Preview {
-    TabBarView(selectedTab: .constant(.home))
+    //    TabBarView(selectedTab: .constant(.home))
+    HomeView()
 }

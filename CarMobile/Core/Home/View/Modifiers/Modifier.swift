@@ -44,5 +44,5 @@ struct Modifier: ViewModifier {
 }
 
 #Preview {
-    TabBarView(selectedTab: .constant(.home))
+    TabBarView()
 }

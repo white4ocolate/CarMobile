@@ -10,11 +10,11 @@ import SwiftUI
 struct LeftControlBar : View {
     var body: some View {
         ZStack(alignment: .leading) {
-            LeftTrapezium()
+            LeftTrapezoid()
                 .fill(LinearGradient(colors: [.darkBlue.opacity(0.2), .gray.opacity(0.6)], startPoint: .leading, endPoint: .trailing))
                 .frame(height: 400)
                 .overlay {
-                    LeftTrapeziumBackground()
+                    LeftTrapezoid(isBackground: true)
                         .stroke(lineWidth: 0.75)
                         .foregroundStyle(LinearGradient(colors: [.clear, .gray, .clear], startPoint: .top, endPoint: .bottom))
                         .opacity(0.75)
@@ -41,35 +41,31 @@ struct LeftControlBar : View {
     }
 }
 
-struct LeftTrapezium: Shape {
+struct LeftTrapezoid: Shape {
+    var isBackground: Bool = false
+
     func path(in rect: CGRect) -> Path {
         var path = Path()
 
-        path.move(to: CGPoint(x: rect.minX, y: rect.minY))
-        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        if !isBackground {
+            path.move(to: CGPoint(x: rect.minX, y: rect.minY))
+            path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        } else {
+            path.move(to: CGPoint(x: rect.minX, y: rect.maxY))
+        }
         path.addLine(to: CGPoint(x: rect.minX + 40, y: rect.maxY - 40))
         path.addQuadCurve(to: CGPoint(x: rect.minX + 50, y: rect.maxY - 60), control: CGPoint(x: rect.minX + 50, y: rect.maxY - 50))
         path.addLine(to: CGPoint(x: rect.minX + 50, y: rect.minY + 60))
         path.addQuadCurve(to: CGPoint(x: rect.minX + 40, y: rect.minY + 40), control: CGPoint(x: rect.minX + 50, y: rect.minY + 50))
-        path.closeSubpath()
+        if !isBackground {
+            path.closeSubpath()
+        } else {
+            path.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
+        }
 
         return path
     }
-}
 
-struct LeftTrapeziumBackground: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-
-        path.move(to: CGPoint(x: rect.minX, y: rect.maxY))
-        path.addLine(to: CGPoint(x: rect.minX + 40, y: rect.maxY - 40))
-        path.addQuadCurve(to: CGPoint(x: rect.minX + 50, y: rect.maxY - 60), control: CGPoint(x: rect.minX + 50, y: rect.maxY - 50))
-        path.addLine(to: CGPoint(x: rect.minX + 50, y: rect.minY + 60))
-        path.addQuadCurve(to: CGPoint(x: rect.minX + 40, y: rect.minY + 40), control: CGPoint(x: rect.minX + 50, y: rect.minY + 50))
-        path.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
-
-        return path
-    }
 }
 
 #Preview {

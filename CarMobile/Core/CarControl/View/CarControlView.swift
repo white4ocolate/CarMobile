@@ -14,7 +14,6 @@ struct CarControlView: View {
     @State private var backLight: CGFloat = 0.3
     @State private var themebackLight: CGFloat = 0.3
     @State private var circumferenceLength: CGFloat = 0.75
-    @StateObject private var coordinator = Coordinator()
     @State private var isStart: Bool = false
     @State private var isVisible = false
     @State private var speedlineOpacity: CGFloat = 0.0
