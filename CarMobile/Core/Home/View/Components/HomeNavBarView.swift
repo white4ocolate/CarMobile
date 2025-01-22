@@ -31,7 +31,7 @@ extension NavBarView {
                     .foregroundStyle(.white)
                     .fontWeight(.semibold)
                 Text("Audi e-tron 2024")
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.gray)
                     .fontWeight(.regular)
             }
             .font(.system(size: 16))

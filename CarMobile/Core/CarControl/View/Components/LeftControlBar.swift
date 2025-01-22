@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LeftControlBar : View {
+
+    @Binding var isStart: Bool
+
     var body: some View {
         ZStack(alignment: .leading) {
             LeftTrapezoid()
@@ -29,12 +32,14 @@ struct LeftControlBar : View {
                     Image(systemName: "fan.fill")
                         .font(.system(size: 25))
                 }
+                .disabled(!isStart ? true : false)
                 Image(systemName: "parkingsign")
                     .font(.system(size: 25))
                 Image(systemName: "steeringwheel")
                     .font(.system(size: 25))
             }
-            .foregroundStyle(.gray)
+            .foregroundStyle(.white)
+            .opacity(isStart ? 1 : 0.3)
             .padding(8)
         }
 
@@ -69,5 +74,5 @@ struct LeftTrapezoid: Shape {
 }
 
 #Preview {
-    LeftControlBar()
+    LeftControlBar(isStart: .constant(true))
 }

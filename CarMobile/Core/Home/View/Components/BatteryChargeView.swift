@@ -45,7 +45,7 @@ struct BatteryChargeView: View {
                 }
             }
         }
-        .offset(x: 100, y: -77)
+
         .onAppear {
             Task {
                 withAnimation(.easeInOut(duration: batteryCharge * 3 )) {

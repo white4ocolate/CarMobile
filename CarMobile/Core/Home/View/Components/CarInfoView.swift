@@ -19,14 +19,12 @@ struct CarInfoView: View {
             Capsule()
                 .fill(Color.white)
                 .frame(maxWidth: light * 5)
-                .frame(height: light * 0.8)
+                .frame(height: light * 1)
                 .blur(radius: light * 2)
-            Image("audi_e-tron")
+            Image("audi_q5_sportback")
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: .infinity)
-                .padding(.vertical)
-                .offset(y: 30)
         }
         .onAppear {
             Task {

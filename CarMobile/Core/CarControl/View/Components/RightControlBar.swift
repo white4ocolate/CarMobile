@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct RightControlBar : View {
+
+    @Binding var isStart: Bool
+    
     var body: some View {
         ZStack(alignment: .trailing) {
             RightTrapezoid()
@@ -29,7 +32,8 @@ struct RightControlBar : View {
                 Image(systemName: "car.top.door.rear.left.and.rear.right.open.fill")
                     .font(.system(size: 25))
             }
-            .foregroundStyle(.gray)
+            .foregroundStyle(.white)
+            .opacity(isStart ? 1 : 0.3)
             .padding(8)
         }
     }
@@ -62,5 +66,5 @@ struct RightTrapezoid: Shape {
 }
 
 #Preview {
-    RightControlBar()
+    RightControlBar(isStart: .constant(true))
 }

@@ -18,6 +18,7 @@ struct MapCardView: View {
                     .fontWeight(.semibold)
                     .font(.system(size: 17))
                     .frame(height: 30)
+                    .foregroundStyle(.white)
                 Spacer()
                 Button {
                     print("Show all places")

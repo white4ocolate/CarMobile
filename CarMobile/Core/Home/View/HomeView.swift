@@ -18,7 +18,10 @@ struct HomeView: View {
                     VStack(spacing: 10) {
                         ZStack {
                             CarInfoView()
+                                .padding(.top, 50)
                             BatteryChargeView()
+                                .offset(x: 100, y: -100)
+                                .padding(.top, 50)
                         }
                         QuickAccessCardView()
                         BatteryInfoCardView()

@@ -32,13 +32,12 @@ struct CarControlView: View {
                     }
                     .padding(.bottom, 80)
                     HStack {
-
-                        LeftControlBar()
+                        LeftControlBar(isStart: $isStart)
                             .offset(x: isVisible ? 0 : -200)
-                            .animation(.easeOut(duration: 1.5), value: isVisible)
-                        RightControlBar()
+                            .animation(.easeOut(duration: 0.8), value: isVisible)
+                        RightControlBar(isStart: $isStart)
                             .offset(x: isVisible ? 0 : +200)
-                            .animation(.easeOut(duration: 1.5), value: isVisible)
+                            .animation(.easeOut(duration: 0.8), value: isVisible)
                     }
                     .padding(.top, 150)
                 }
@@ -91,6 +90,7 @@ extension CarControlView {
                     Text("0")
                         .font(.system(size: 55))
                         .fontWeight(.heavy)
+                        .foregroundStyle(.white)
                     Text("mph")
                 }
                 HStack {
@@ -170,7 +170,7 @@ extension CarControlView {
                 .opacity(backLight)
 
         }
-        .offset(y: isVisible ? 0 : +200)
+        .offset(y: isVisible ? 0 : +400)
         .opacity(isVisible ? 1 : 0)
         .animation(.easeOut(duration: 1), value: isVisible)
         .onAppear {
@@ -200,7 +200,9 @@ extension CarControlView {
                 .blur(radius: 20)
                 .opacity(isStart ? 1 : 0)
             Button {
-                isStart.toggle()
+                withAnimation(.easeInOut(duration: 2)) {
+                    isStart.toggle()
+                }
                 Task {
                     withAnimation(.easeInOut(duration: 2 )) {
                         backLight = isStart ? 1 : 0.3
